@@ -1,0 +1,99 @@
+
+#root{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.boardContainer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.block {
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+
+}
+
+.block:hover{
+    background-color: white;
+}
+
+
+
+body {
+    color: white;
+    background-color: darkblue;
+   
+}
+
+.title {
+    font-size: 6em;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    color: darkgray;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(10, 2em);
+    grid-template-rows: repeat(10, 2em);
+    width: fit-content;
+    height: fit-content;
+}
+
+.block {
+    border: 2px solid black;
+    width: 100%;
+    height: 100%;
+}
+.container {
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: inherit;
+}
+
+
+.startContainer {
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: inherit;
+
+}
+
+
+
+.enter {
+    width: 6em;
+    margin: 2em;
+    background-color: darkgray;
+    border-radius: 2em;
+
+}
+
+.player{ font-size: 3em;}
+
+#playerTextInput{
+    width: 18em;
+   
+}
+
+.orientBtn{
+    margin:1.5em;
+}
