@@ -121,7 +121,7 @@ const gameBoard = () => {
                 let block = document.createElement("div");
                 block.classList = "block";
                 block.dataset.rows = row;
-                block.dataset.columns = column;
+                block.dataset.column = column;
                 container.appendChild(block);
                 column++;
             }
@@ -138,4 +138,4 @@ const gameBoard = () => {
 
 
 
-module.exports = gameBoard;
+export default gameBoard;

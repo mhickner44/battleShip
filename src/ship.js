@@ -52,4 +52,4 @@ const shipFactory = (shipName) => {
 
 
 
-module.exports = shipFactory;
+export default  shipFactory;

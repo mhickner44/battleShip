@@ -31,7 +31,7 @@ const p1submarine = shipFactory("submarine");
 const p1destroyer = shipFactory("destroyer");
 
 
-const botCarrier = shipFactory("carrier",);
+const botCarrier = shipFactory("carrier");
 const botBattleship = shipFactory("battleship");
 const botCruiser = shipFactory("cruiser");
 const botSubmarine = shipFactory("submarine");
@@ -45,7 +45,7 @@ const botDestroyer = shipFactory("destroyer");
 // botBoard.shipHorizontal(botCruiser, 7, 1);
 // botBoard.shipHorizontal(botSubmarine, 3, 1);
 // botBoard.shipHorizontal(botDestroyer, 8, 7);
-// p1Board.shipHorizontal(p1carrier, 0, 1);
+// 
 // p1Board.shipVertical(p1battleship, 2, 1);
 // p1Board.shipHorizontal(p1cruiser, 2, 4);
 // p1Board.shipHorizontal(p1submarine, 5, 4);
