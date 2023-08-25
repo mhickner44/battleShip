@@ -5,68 +5,38 @@ const Board = require('./gameBoard.js');
 const root = document.getElementById("root");
 const game = Board();
 
-
+// import { p1Board, p1carrier } from './gameLogic.js';
 
 function newGame() {
     let component = document.createElement('div');
-    let playerName = document.createElement('h2');
-    let playerTextInput = document.createElement('input');
-    let enterBtn = document.createElement('button');
+    component.classList="boardContainer";
+    let grid1= game.renderBoard();
+    let grid2=game.renderBoard();
 
+    component.appendChild(grid1);
+    component.appendChild(grid2);
 
-    component.appendChild(playerName);
-    component.appendChild(playerTextInput);
-    component.appendChild(enterBtn);
-
-    component.classList = "container";
-    playerName.classList = "player";
-    playerTextInput.id = "playerTextInput";
-    enterBtn.classList = "enter";
-
-    enterBtn.textContent = 'Enter';
-    playerName.textContent = "Player";
-
-
-    enterBtn.addEventListener("click", function () {
-        //take the name of the player input 
-        const textInput = document.querySelector('#playerTextInput')
-
-        root.innerHTML = "";
-
-        const gridContainer = game.renderBoard();
-        const playerName = document.createElement('h2');
-        const orientBtn = document.createElement('button');
-        orientBtn.textContent="ROTATE";
-        orientBtn.classList="orientBtn";
-
-        gridContainer.classList = "gridContainer ";
-   
-        //get text of playername and display it 
-
-        playerName.textContent = textInput.value;
-
-    
-
-        const container = document.createElement('div');
-        container.classList="container";
-
-        container.appendChild(playerName);
-        container.appendChild(orientBtn);
-        container.appendChild(gridContainer);
-
-        root.appendChild(container);
-        shipPlacement()
-
-    });
 
     return component;
 }
 
-function shipPlacement(){
-    //try to get one of the grid div elements that is on the board.
-    let gridElements=document.querySelectorAll("block");
-    console.log("we gottem"+gridElements.length);
-    //dont think this worked
+// function shipPlacement() {
+//     //try to get one of the grid div elements that is on the board.
+//     document.querySelectorAll('.some-class').forEach(gridElement => {
+//         gridElement.addEventListener('click', event => {
+//             //handle click
+//             let row = gridElement.getAttribute("data-rows")
+//             let column = gridElement.getAttribute("data-column");
+//             //place a ship on this spot 
+// //or return the cooridnates to the game loop and plaec the ship
+
+//            // p1Board.shipHorizontal(p1carrier, 0, 1);
+           
+//         })
+//     })
+// }
+
+function gridSelection() {
 
 }
 
