@@ -6,6 +6,7 @@ const root = document.getElementById("root");
 
 import gameBoard from "./gameBoard";
 
+
 const game = gameBoard();
 let selection;
 // import { p1Board, p1carrier } from './gameLogic.js';
@@ -20,9 +21,36 @@ function newGame() {
     component.appendChild(grid2);
 
 
+    //run button
+    let runBtn = document.createElement("button");
+    runBtn.classList="setup";
+    runBtn.textContent="run";
+    component.appendChild(runBtn);
+
+
     return component;
 }
 
+
+//function gridSelection(playerBoard1,playerBoard2) {
+function gridEvents() {
+    
+    document.querySelectorAll('.block').forEach(gridElement => {
+        gridElement.addEventListener('click', event => {
+            //handle click
+            let row = gridElement.getAttribute("data-rows")
+            let column = gridElement.getAttribute("data-column");
+            //place a ship on this spot 
+            //or return the cooridnates to the game loop and placethe ship
+            //return the grid that was selected
+
+            //will need to add what grid the selection came from
+            // //blur the other one or something
+            selection = {row,column}
+            console.log(selection);
+        })
+    })
+}
 // function shipPlacement() {
 //     //try to get one of the grid div elements that is on the board.
 //     document.querySelectorAll('.some-class').forEach(gridElement => {
@@ -38,26 +66,6 @@ function newGame() {
 //         })
 //     })
 // }
-//function gridSelection(playerBoard1,playerBoard2) {
-function gridEvents() {
-    
-    document.querySelectorAll('.block').forEach(gridElement => {
-        gridElement.addEventListener('click', event => {
-            //handle click
-            let row = gridElement.getAttribute("data-rows")
-            let column = gridElement.getAttribute("data-column");
-            //place a ship on this spot 
-            //or return the cooridnates to the game loop and placethe ship
-            //return the grid that was selected
-
-            //will need to add what grid the selection came from
-            //blur the other one or something
-            selection = {row,column}
-            console.log(selection);
-        })
-    })
-}
-
 
 
 
