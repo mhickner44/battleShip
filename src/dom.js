@@ -8,7 +8,7 @@ import gameBoard from "./gameBoard";
 
 
 const game = gameBoard();
-let selection;
+
 // import { p1Board, p1carrier } from './gameLogic.js';
 
 function newGame() {
@@ -33,24 +33,24 @@ function newGame() {
 
 
 //function gridSelection(playerBoard1,playerBoard2) {
-function gridEvents() {
+// function gridEvents() {
     
-    document.querySelectorAll('.block').forEach(gridElement => {
-        gridElement.addEventListener('click', event => {
-            //handle click
-            let row = gridElement.getAttribute("data-rows")
-            let column = gridElement.getAttribute("data-column");
-            //place a ship on this spot 
-            //or return the cooridnates to the game loop and placethe ship
-            //return the grid that was selected
+//     document.querySelectorAll('.block').forEach(gridElement => {
+//         gridElement.addEventListener('click', event => {
+//             //handle click
+//             let row = gridElement.getAttribute("data-rows")
+//             let column = gridElement.getAttribute("data-column");
+//             //place a ship on this spot 
+//             //or return the cooridnates to the game loop and placethe ship
+//             //return the grid that was selected
 
-            //will need to add what grid the selection came from
-            // //blur the other one or something
-            selection = {row,column}
-            console.log(selection);
-        })
-    })
-}
+//             //will need to add what grid the selection came from
+//             // //blur the other one or something
+//             selection = {row,column}
+//             console.log(selection);
+//         })
+//     })
+// }
 // function shipPlacement() {
 //     //try to get one of the grid div elements that is on the board.
 //     document.querySelectorAll('.some-class').forEach(gridElement => {
@@ -70,4 +70,4 @@ function gridEvents() {
 
 
 
-export  {gridEvents,newGame,selection};
+export  {newGame};
