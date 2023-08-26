@@ -1,6 +1,6 @@
 
 
-const player = (name, AIorNAH) => {
+const player = (name) => {
 
     const getName = () => name;
 
@@ -19,6 +19,8 @@ const player = (name, AIorNAH) => {
         y=Math.floor(Math.random() * 10)
         return [x, y]
     }
+
+
 
     // Returns a random integer from 0 to 9:
 // Math.floor(Math.random() * 10);

@@ -13,13 +13,26 @@ const game = gameBoard();
 
 function newGame() {
     let component = document.createElement('div');
+    let playerBoardLabel = document.createElement('h2');
+    playerBoardLabel.textContent="Player One";
+
+    let AIBoardLabel = document.createElement('h2');
+    AIBoardLabel.textContent="Enemy";
+
+
     component.classList = "boardContainer";
+    
+    
+    
     let grid1 = game.renderBoard();
     let grid2 = game.renderBoard();
+    grid2.id="enemyGrid";
+    grid1.id="playerGrid";
 
+    component.appendChild(playerBoardLabel);
     component.appendChild(grid1);
     component.appendChild(grid2);
-
+    component.appendChild(AIBoardLabel);
 
     //run button
     let runBtn = document.createElement("button");
