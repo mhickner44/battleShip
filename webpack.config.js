@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/gameLoop.js',
+  entry: './src/gameDriver.js',
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',

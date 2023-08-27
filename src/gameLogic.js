@@ -3,9 +3,6 @@
 import shipFactory from './ship';
 
 
-
-
-
 //ships
 const botCarrier = shipFactory("carrier");
 const botBattleship = shipFactory("battleship");
@@ -18,7 +15,6 @@ const p1battleship = shipFactory("battleship");
 const p1cruiser = shipFactory("cruiser");
 const p1submarine = shipFactory("submarine");
 const p1destroyer = shipFactory("destroyer");
-
 
 
 function fillBoard(board) {
@@ -38,23 +34,11 @@ function fillBoardTemp(board) {
     board.shipHorizontal(p1destroyer, 4, 6);
     return board;
 }
-// const fillBoard = () => {
 
-//     const insertShips = (board) => {
-//         board.shipHorizontal(botCarrier, 0, 6);
-//         board.shipVertical(botBattleship, 0, 1);
-//         board.shipHorizontal(botCruiser, 7, 1);
-//         board.shipHorizontal(botSubmarine, 3, 1);
-//         board.shipHorizontal(botDestroyer, 8, 7);
-//     }
-
-//     return { insertShips }
-// }
-//this will only be for the ai
+  
 
 
-
-
+ 
 
 export { fillBoard ,fillBoardTemp}
 

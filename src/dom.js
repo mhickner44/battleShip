@@ -5,11 +5,11 @@ const box = document.getElementById("box");
 const root = document.getElementById("root");
 
 import gameBoard from "./gameBoard";
-
+import { handleAttack } from "./gameDriver";
 
 const game = gameBoard();
 
-// import { p1Board, p1carrier } from './gameLogic.js';
+
 
 function newGame() {
     let component = document.createElement('div');
@@ -43,6 +43,20 @@ function newGame() {
 
     return component;
 }
+
+
+const addGridListeners = (enemyGrid) => {
+    for (const gridElement of enemyGrid.children) {
+      gridElement.addEventListener('click', event => {
+        //handle click
+        let row = gridElement.getAttribute("data-rows")
+        let column = gridElement.getAttribute("data-column");
+        handleAttack(row, column, gridElement);
+      }
+      )
+    }
+  };
+
 
 
 //function gridSelection(playerBoard1,playerBoard2) {
@@ -83,4 +97,4 @@ function newGame() {
 
 
 
-export  {newGame};
+export  {newGame,addGridListeners};

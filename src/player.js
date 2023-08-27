@@ -27,5 +27,4 @@ const player = (name) => {
     return { getName,AIShipOrientation,AISpotPlacement}
 }
 
-
-module.exports = player;
+export {player}
