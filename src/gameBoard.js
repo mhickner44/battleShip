@@ -96,6 +96,7 @@ const gameBoard = () => {
 
     let gameOver = () => {
         let endGame = true;
+       
         for (const ship in ships) {
             if (ships[ship].isSunk() == false) {
                 return false;
