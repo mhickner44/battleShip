@@ -4,10 +4,12 @@ import { newGame, addGridListeners, endGame } from './dom.js';
 import gameBoard from './gameBoard';
 import { fillBoard, fillBoardTemp } from './gameLogic';
 import { player } from './player';
+import { boardSetup } from './dom.js';
 
 
 
-//player board temporarily
+
+
 
 
 document.body.appendChild(newGame());
@@ -30,10 +32,12 @@ let ships = AIBoard.getShips();
 let enemyGrid = document.getElementById("enemyGrid");
 addGridListeners(enemyGrid);
 
+//
+//display the popup selection for ship placement
+document.body.appendChild(boardSetup());
+
+
 //handle turns
-
-
-
 function handleAttack(row, column, gridElement) {
     //players attack
 

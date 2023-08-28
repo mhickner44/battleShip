@@ -61,26 +61,26 @@ const addGridListeners = (enemyGrid) => {
 };
 
 
-function endGame(result,winner) {
+function endGame(result, winner) {
   if (result == true) {
     //place pop up over the board\
 
 
     const popUpContainer = document.createElement("div");
-    popUpContainer.className="popUpContainer"
+    popUpContainer.className = "popUpContainer"
     const text = document.createElement("h2");
-    text.textContent="Game Over!";
+    text.textContent = "Game Over!";
     const winnerText = document.createElement("h2");
-    winnerText.className="winnerText";
-    winnerText.textContent="You "+winner;
-    const replayBtn=document.createElement("button");
-    replayBtn.textContent="Replay?"
+    winnerText.className = "winnerText";
+    winnerText.textContent = "You " + winner;
+    const replayBtn = document.createElement("button");
+    replayBtn.textContent = "Replay?"
 
     //add all elements
     popUpContainer.appendChild(text);
     popUpContainer.appendChild(winnerText);
     popUpContainer.appendChild(replayBtn);
-    
+
     document.body.appendChild(popUpContainer);
   }
 
@@ -88,42 +88,33 @@ function endGame(result,winner) {
 
 
 
-//function gridSelection(playerBoard1,playerBoard2) {
-// function gridEvents() {
+function boardSetup(){
+  const setupContainer = document.createElement("div");
+  setupContainer.classList = "setupContainer";
 
-//     document.querySelectorAll('.block').forEach(gridElement => {
-//         gridElement.addEventListener('click', event => {
-//             //handle click
-//             let row = gridElement.getAttribute("data-rows")
-//             let column = gridElement.getAttribute("data-column");
-//             //place a ship on this spot 
-//             //or return the cooridnates to the game loop and placethe ship
-//             //return the grid that was selected
+  //Place Ships text
+  const text = document.createElement("h2");
+  text.textContent = "Place your ships";
+  //change orientation button
+  const orientBtn = document.createElement("button");
+  orientBtn.textContent = "horizontal";
+  orientBtn.classList="orientBtn";
 
-//             //will need to add what grid the selection came from
-//             // //blur the other one or something
-//             selection = {row,column}
-//             console.log(selection);
-//         })
-//     })
-// }
-// function shipPlacement() {
-//     //try to get one of the grid div elements that is on the board.
-//     document.querySelectorAll('.some-class').forEach(gridElement => {
-//         gridElement.addEventListener('click', event => {
-//             //handle click
-//             let row = gridElement.getAttribute("data-rows")
-//             let column = gridElement.getAttribute("data-column");
-//             //place a ship on this spot 
-// //or return the cooridnates to the game loop and plaec the ship
+  //grid
+  let grid = game.renderBoard();
 
-//            // p1Board.shipHorizontal(p1carrier, 0, 1);
 
-//         })
-//     })
-// }
+
+  //append all nodes
+  setupContainer.appendChild(text);
+  setupContainer.appendChild(orientBtn);
+  setupContainer.appendChild(grid);
+
+  return setupContainer;
+
+}
 
 
 
 
-export { newGame, addGridListeners,endGame };
+export { newGame, addGridListeners, endGame, boardSetup };

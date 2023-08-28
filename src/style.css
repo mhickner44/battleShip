@@ -1,12 +1,3 @@
-/* 
-#root{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-} */
-
 
 .boardContainer {
     position: absolute;
@@ -36,8 +27,25 @@
     color:darkgray;
     width: 40%;
     height: 12em;
-
 }
+
+.setupContainer{
+    position: absolute;
+    left: 30%;
+   
+    top: 50%;
+    transform: translateY(-50%);
+   text-align: center;
+
+    background-color: white;
+    border: 2px black;
+    border-radius: 2em;
+    color:darkgray;
+    width: fit-content;
+    height: fit-content;
+    padding: 3em;
+}
+
 .block {
     border: 1px solid black;
     width: 100%;
@@ -128,5 +136,5 @@ body {
 }
 
 .orientBtn {
-    margin: 1.5em;
+    margin: 1em;
 }
