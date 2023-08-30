@@ -99,13 +99,33 @@ function addPlacementListeners(grid) {
       // prevent default to allow drop
       event.preventDefault();
       let blockID = event.dataTransfer.getData("textID");
-      let infoData = event.dataTransfer.getData("data");
+      let shipType = event.dataTransfer.getData("shipType");
+      let shipLength = event.dataTransfer.getData("shipLength");
       let blok = document.querySelector(blockID);
+
+      //adding the dragged ship to it
       event.target.appendChild(blok);
-      event.target.dataset.length = infoData;
-      //change logical board 
-      //get the lenght of the incoming block
-      let lengthData = event.dataTransfer.getData("length");
+
+
+      //setting the grid element ship type dataset
+      event.target.dataset.shipType = shipType;
+
+      //use length to add to the other div elements below it
+
+      //vertically
+        // keep the same column  add the shiptype dataset tot he lengths
+        let neededDiv=i;
+
+        for(let ii= 0 ;ii<shipLength-1;ii++){
+          //get the grid elements that are needed 
+          //same row adding the column value 
+          //every ten is the next value i need
+          neededDiv+=10;
+          grid[neededDiv].dataset.shipType=shipType;
+        }
+
+
+      //horizontally
 
 
 
@@ -165,7 +185,7 @@ function placementShips() {
   //draggable ship container
   const shipContainer = document.createElement("div");
   shipContainer.classList.add("shipContainer");
-  
+
   //ship type and length
   let ships = [
     { length: 5, shipType: 5 },
@@ -181,8 +201,8 @@ function placementShips() {
   for (let i = 0; i < 5; i++) {
     let placementShip = document.createElement("div");
     placementShip.classList = "ship" + i;
-
-
+    placementShip.dataset.shipType = ships[i].shipType;
+    placementShip.dataset.length = ships[i].length;
     //create the number of blocks that are needed .
     for (let ii = 0; ii < ships[i].length; ii++) {
       let shipBlock = document.createElement("div");
@@ -196,8 +216,9 @@ function placementShips() {
     placementShip.addEventListener("dragstart", (event) => {
       // store a ref. on the dragged elem
       // dragged = event.target;
-      event.dataTransfer.setData("textID", "."+event.target.classList);
-      // event.dataTransfer.setData("data", event.target.dataset.length);
+      event.dataTransfer.setData("textID", "." + event.target.classList);
+      event.dataTransfer.setData("shipType", event.target.dataset.shipType);
+      event.dataTransfer.setData("shipLength", event.target.dataset.length);
     });
     shipContainer.appendChild(placementShip)
   }
