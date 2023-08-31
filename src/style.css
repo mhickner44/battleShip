@@ -141,11 +141,25 @@ body {
 
 /*  draggable ship */
 .shipContainer>div {
-    width: 2em;
+
+    width: fit-content;
     height: fit-content;
+
     background-color: red;
     height: fit-content;
 
+}
+
+#horizontalShip {
+    display: flex;
+    flex-direction: row;
+
+
+    width: fit-content;
+    height: fit-content;
+
+    background-color: red;
+    height: fit-content;
 }
 
 #innerShip {

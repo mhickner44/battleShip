@@ -102,8 +102,8 @@ function addPlacementListeners(grid) {
       let shipType = event.dataTransfer.getData("shipType");
       let shipLength = event.dataTransfer.getData("shipLength");
       let blok = document.querySelector(blockID);
-
-      //adding the dragged ship to it
+      let shipID=event.dataTransfer.getData("id");
+      //adding the dragged ship to it 
       event.target.appendChild(blok);
 
 
@@ -113,16 +113,23 @@ function addPlacementListeners(grid) {
       //use length to add to the other div elements below it
 
       //vertically
-        // keep the same column  add the shiptype dataset tot he lengths
-        let neededDiv=i;
+      // keep the same column  add the shiptype dataset tot he lengths
+      let neededDiv = i;
 
-        for(let ii= 0 ;ii<shipLength-1;ii++){
-          //get the grid elements that are needed 
-          //same row adding the column value 
-          //every ten is the next value i need
-          neededDiv+=10;
-          grid[neededDiv].dataset.shipType=shipType;
+      for (let ii = 0; ii < shipLength - 1; ii++) {
+        //get the grid elements that are needed 
+        //same row adding the column value 
+        //every ten is the next value i need
+        if (shipID == "vertical") {
+          neededDiv += 10;
+        } else {
+          neededDiv += 1;
         }
+
+        //horizontal
+
+        grid[neededDiv].dataset.shipType = shipType;
+      }
 
 
       //horizontally
@@ -145,9 +152,9 @@ function boardSetup() {
   const text = document.createElement("h2");
   text.textContent = "Place your ships";
   //change orientation button
-  const orientBtn = document.createElement("button");
-  orientBtn.textContent = "horizontal";
-  orientBtn.classList = "orientBtn";
+  const startBtn = document.createElement("button");
+  startBtn.textContent = "Start Game";
+  startBtn.classList = "orientBtn";
 
   //grid
   let grid = game.renderBoard();
@@ -173,7 +180,7 @@ function boardSetup() {
 
   //append all nodes
   setupContainer.appendChild(text);
-  setupContainer.appendChild(orientBtn);
+  setupContainer.appendChild(startBtn);
   setupContainer.appendChild(grid);
   setupContainer.appendChild(shipContainer)
 
@@ -203,6 +210,7 @@ function placementShips() {
     placementShip.classList = "ship" + i;
     placementShip.dataset.shipType = ships[i].shipType;
     placementShip.dataset.length = ships[i].length;
+    placementShip.id="vertical";
     //create the number of blocks that are needed .
     for (let ii = 0; ii < ships[i].length; ii++) {
       let shipBlock = document.createElement("div");
@@ -219,8 +227,24 @@ function placementShips() {
       event.dataTransfer.setData("textID", "." + event.target.classList);
       event.dataTransfer.setData("shipType", event.target.dataset.shipType);
       event.dataTransfer.setData("shipLength", event.target.dataset.length);
+      event.dataTransfer.setData("id", event.target.id);
+      
     });
-    shipContainer.appendChild(placementShip)
+
+    placementShip.addEventListener("dblclick", (event) => {
+      // change orientation event
+      //change dataset orientateion
+      // placementShip.style.display="flex";
+      // placementShip.style.flexDirection="row";
+
+      if (placementShip.id == "horizontalShip") {
+        placementShip.removeAttribute("id")
+      }else{
+        placementShip.setAttribute("id","horizontalShip") 
+      }
+
+    });
+    shipContainer.appendChild(placementShip);
   }
   return shipContainer;
 }
