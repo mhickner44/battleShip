@@ -36,14 +36,6 @@ function newGame() {
   component.appendChild(grid1);
   component.appendChild(grid2);
   component.appendChild(AIBoardLabel);
-
-  //run button
-  let runBtn = document.createElement("button");
-  runBtn.classList = "setup";
-  runBtn.textContent = "run";
-  component.appendChild(runBtn);
-
-
   return component;
 }
 
@@ -102,7 +94,7 @@ function addPlacementListeners(grid) {
       let shipType = event.dataTransfer.getData("shipType");
       let shipLength = event.dataTransfer.getData("shipLength");
       let blok = document.querySelector(blockID);
-      let shipID=event.dataTransfer.getData("id");
+      let shipID = event.dataTransfer.getData("id");
       //adding the dragged ship to it 
       event.target.appendChild(blok);
 
@@ -110,29 +102,23 @@ function addPlacementListeners(grid) {
       //setting the grid element ship type dataset
       event.target.dataset.shipType = shipType;
 
-      //use length to add to the other div elements below it
+    
 
-      //vertically
-      // keep the same column  add the shiptype dataset tot he lengths
+    
+   
       let neededDiv = i;
 
+      //placing shiptype numbers on the grid for the lenght of the ship
       for (let ii = 0; ii < shipLength - 1; ii++) {
         //get the grid elements that are needed 
         //same row adding the column value 
-        //every ten is the next value i need
         if (shipID == "vertical") {
           neededDiv += 10;
         } else {
           neededDiv += 1;
         }
-
-        //horizontal
-
         grid[neededDiv].dataset.shipType = shipType;
       }
-
-
-      //horizontally
 
 
 
@@ -147,35 +133,22 @@ function addPlacementListeners(grid) {
 function boardSetup() {
   const setupContainer = document.createElement("div");
   setupContainer.classList = "setupContainer";
-
+  let grid = game.renderBoard();
+  grid.setAttribute('id', "placementGrid");
   //Place Ships text
   const text = document.createElement("h2");
   text.textContent = "Place your ships";
   //change orientation button
   const startBtn = document.createElement("button");
+  startBtn.classList="startBtn";
   startBtn.textContent = "Start Game";
-  startBtn.classList = "orientBtn";
 
   //grid
-  let grid = game.renderBoard();
 
   //add the listneers to the blocks of the grid
   addPlacementListeners(grid.childNodes);
 
-
   let shipContainer = placementShips();
-
-  //add draggable ship elemenets
-  //do this in a loop 
-  //ship divs functino call
-
-
-  //add the ship elements here
-  // set draggable
-
-
-
-  //add ships to ship container
 
 
   //append all nodes
@@ -183,6 +156,10 @@ function boardSetup() {
   setupContainer.appendChild(startBtn);
   setupContainer.appendChild(grid);
   setupContainer.appendChild(shipContainer)
+
+
+
+ 
 
   return setupContainer;
 
@@ -210,7 +187,7 @@ function placementShips() {
     placementShip.classList = "ship" + i;
     placementShip.dataset.shipType = ships[i].shipType;
     placementShip.dataset.length = ships[i].length;
-    placementShip.id="vertical";
+    placementShip.id = "vertical";
     //create the number of blocks that are needed .
     for (let ii = 0; ii < ships[i].length; ii++) {
       let shipBlock = document.createElement("div");
@@ -228,7 +205,7 @@ function placementShips() {
       event.dataTransfer.setData("shipType", event.target.dataset.shipType);
       event.dataTransfer.setData("shipLength", event.target.dataset.length);
       event.dataTransfer.setData("id", event.target.id);
-      
+
     });
 
     placementShip.addEventListener("dblclick", (event) => {
@@ -239,8 +216,8 @@ function placementShips() {
 
       if (placementShip.id == "horizontalShip") {
         placementShip.removeAttribute("id")
-      }else{
-        placementShip.setAttribute("id","horizontalShip") 
+      } else {
+        placementShip.setAttribute("id", "horizontalShip")
       }
 
     });

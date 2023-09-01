@@ -23,9 +23,7 @@ let AIBoard = gameBoard();
 
 //fill the boards/ will turn into ship placement
 AIBoard = fillBoard(AIBoard);
-p1Board = fillBoardTemp(p1Board);
 
-let ships = AIBoard.getShips();
 
 
 //adds grid listeners 
@@ -36,6 +34,9 @@ addGridListeners(enemyGrid);
 //display the popup selection for ship placement
 document.body.appendChild(boardSetup());
 
+//start butten listener
+let startBtn = document.querySelector(".startBtn");
+startBtn.addEventListener('click', finalizePlacement)
 
 //handle turns
 function handleAttack(row, column, gridElement) {
@@ -88,10 +89,10 @@ function AITurn() {
     }
 
     //check if spot has already been taken
-    if (p1Board.getSpot(AIShot[0], AIShot[1]) == 7|| p1Board.getSpot(AIShot[0], AIShot[1]) == 6) {
-       //AI decides 
+    if (p1Board.getSpot(AIShot[0], AIShot[1]) == 7 || p1Board.getSpot(AIShot[0], AIShot[1]) == 6) {
+        //AI decides 
         AITurn();
-    }else{
+    } else {
         p1Board.recieveAttack(AIShot[0], AIShot[1]);
         if (p1Board.getSpot(AIShot[0], AIShot[1]) == 7) {
             AIDomShotElement.style.backgroundColor = "white";
@@ -102,6 +103,35 @@ function AITurn() {
         }
     }
 
+
+}
+
+
+
+
+function finalizePlacement() {
+    let placementBoard = document.getElementById("placementGrid");
+    placementBoard = placementBoard.childNodes;
+    //logicval board
+    let rows = 0;
+    let columns = 0
+    //loop through transfering the ship type from the board to the logical board 
+    for (let i = 0; i <= 99; i++) {
+        //naviatet he two dimensionsal array while the other does it in order 
+        //every ten restart the column 
+        //everyten add one to rows
+        if (i % 10 == 0 && i != 0) {
+            rows += 1;
+            columns = 0;
+        }
+        if (placementBoard[i].dataset.shipType != undefined) {
+            p1Board.board[rows][columns] = placementBoard[i].dataset.shipType
+        }
+        columns++;
+    }
+    let setupContainer=document.querySelector(".setupContainer")
+    //hide the setupBoard
+    setupContainer.remove();
 
 }
 

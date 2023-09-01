@@ -35,12 +35,25 @@ function fillBoardTemp(board) {
     return board;
 }
 
-  
+// function finalizePlacement() {
+//    //can I even access these boards here?
+//     let playerGrid = document.getElementById("playerGrid");
+//     let placementBoard = document.getElementById("placementGrid");
 
 
- 
+//     //loop through transfering the ship type from the board to the logical board 
+//         for (const grid in placementBoard) {
+          
+//         }
 
-export { fillBoard ,fillBoardTemp}
+// }
+
+
+
+
+
+
+export { fillBoard, fillBoardTemp }
 
 
 
