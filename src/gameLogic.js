@@ -18,7 +18,7 @@ const p1destroyer = shipFactory("destroyer");
 
 
 function fillBoard(board) {
-    board.shipHorizontal(botCarrier, 0, 5);
+    // board.shipHorizontal(botCarrier, 0, 5);
     // board.shipVertical(botBattleship, 0, 1);
     // board.shipHorizontal(botCruiser, 7, 1);
     // board.shipVertical(botSubmarine, 3, 4);

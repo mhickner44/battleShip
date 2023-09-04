@@ -92,36 +92,16 @@ function addPlacementListeners(grid) {
       event.preventDefault();
       let blockID = event.dataTransfer.getData("textID");
       let shipType = event.dataTransfer.getData("shipType");
-      let shipLength = event.dataTransfer.getData("shipLength");
-      let blok = document.querySelector(blockID);
-      let shipID = event.dataTransfer.getData("id");
+      let orientation = event.dataTransfer.getData("orientation");
       //adding the dragged ship to it 
+      let blok = document.querySelector(blockID);
       event.target.appendChild(blok);
 
 
       //setting the grid element ship type dataset
       event.target.dataset.shipType = shipType;
-
-    
-
-    
-   
-      let neededDiv = i;
-
-      //placing shiptype numbers on the grid for the lenght of the ship
-      for (let ii = 0; ii < shipLength - 1; ii++) {
-        //get the grid elements that are needed 
-        //same row adding the column value 
-        if (shipID == "vertical") {
-          neededDiv += 10;
-        } else {
-          neededDiv += 1;
-        }
-        grid[neededDiv].dataset.shipType = shipType;
-      }
-
-
-
+      event.target.dataset.orientation = orientation;
+  
     });
 
 
@@ -172,11 +152,11 @@ function placementShips() {
 
   //ship type and length
   let ships = [
-    { length: 5, shipType: 5 },
-    { length: 4, shipType: 4 },
+    { length: 5, shipType: 1 },
+    { length: 4, shipType: 2 },
     { length: 3, shipType: 3 },
-    { length: 3, shipType: 2 },
-    { length: 2, shipType: 1 },]
+    { length: 3, shipType: 4 },
+    { length: 2, shipType: 5 },]
 
   //create the ship
 
@@ -187,6 +167,7 @@ function placementShips() {
     placementShip.classList = "ship" + i;
     placementShip.dataset.shipType = ships[i].shipType;
     placementShip.dataset.length = ships[i].length;
+   placementShip.dataset.orientation="vertical"
     placementShip.id = "vertical";
     //create the number of blocks that are needed .
     for (let ii = 0; ii < ships[i].length; ii++) {
@@ -197,27 +178,25 @@ function placementShips() {
 
 
     placementShip.setAttribute("draggable", true)
-
     placementShip.addEventListener("dragstart", (event) => {
       // store a ref. on the dragged elem
       // dragged = event.target;
       event.dataTransfer.setData("textID", "." + event.target.classList);
       event.dataTransfer.setData("shipType", event.target.dataset.shipType);
       event.dataTransfer.setData("shipLength", event.target.dataset.length);
-      event.dataTransfer.setData("id", event.target.id);
+      event.dataTransfer.setData("orientation", event.target.dataset.orientation);
+ 
 
     });
 
     placementShip.addEventListener("dblclick", (event) => {
-      // change orientation event
-      //change dataset orientateion
-      // placementShip.style.display="flex";
-      // placementShip.style.flexDirection="row";
 
-      if (placementShip.id == "horizontalShip") {
-        placementShip.removeAttribute("id")
+      if (placementShip.dataset.orientation == "vertical") {
+        placementShip.dataset.orientation="horizontal"
+        placementShip.id="horizontalShip" 
       } else {
-        placementShip.setAttribute("id", "horizontalShip")
+        placementShip.dataset.orientation="vertical"
+        placementShip.id="" 
       }
 
     });

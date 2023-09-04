@@ -5,9 +5,7 @@ import gameBoard from './gameBoard';
 import { fillBoard, fillBoardTemp } from './gameLogic';
 import { player } from './player';
 import { boardSetup } from './dom.js';
-
-
-
+import shipFactory from './ship';
 
 
 
@@ -108,16 +106,35 @@ function AITurn() {
 
 
 
+let lengthToShip = {
+
+    1: "carrier",
+    2: "battleship",
+    3: "cruiser",
+    4: "submarine",
+    5: "destroyer"
+}
+
+
+let shipLength = {
+    carrier: 5,
+    battleship: 4,
+    cruiser: 3,
+    submarine: 3,
+    destroyer: 2
+}
+
 
 function finalizePlacement() {
     let placementBoard = document.getElementById("placementGrid");
     placementBoard = placementBoard.childNodes;
-    //logicval board
-    let rows = 0;
+    //logical board
+    let rows = 0
     let columns = 0
+    let shipNum = 0;
     //loop through transfering the ship type from the board to the logical board 
     for (let i = 0; i <= 99; i++) {
-        //naviatet he two dimensionsal array while the other does it in order 
+        //navigate he two dimensionsal array while the other does it in order 
         //every ten restart the column 
         //everyten add one to rows
         if (i % 10 == 0 && i != 0) {
@@ -126,10 +143,22 @@ function finalizePlacement() {
         }
         if (placementBoard[i].dataset.shipType != undefined) {
             p1Board.board[rows][columns] = placementBoard[i].dataset.shipType
+
+            //create ship with proper lengths and orientattion
+            const ship = shipFactory(lengthToShip[placementBoard[i].dataset.shipType])
+            //add that ship using the method
+            if (placementBoard[i].dataset.orientation == "vertical") {
+                p1Board.shipVertical(ship,rows,columns)
+                shipNum++
+            } else {
+                p1Board.shipHorizontal(ship,rows,columns)
+                shipNum++
+            }
+
         }
         columns++;
     }
-    let setupContainer=document.querySelector(".setupContainer")
+    let setupContainer = document.querySelector(".setupContainer")
     //hide the setupBoard
     setupContainer.remove();
 
