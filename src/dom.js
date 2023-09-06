@@ -77,6 +77,9 @@ function endGame(result, winner) {
   }
 
 }
+//temp board for checking if spot is available
+let checkBoard = gameBoard();
+
 
 //add ship placement listeners
 function addPlacementListeners(grid) {
@@ -90,23 +93,76 @@ function addPlacementListeners(grid) {
     grid[i].addEventListener("drop", (event) => {
       // prevent default to allow drop
       event.preventDefault();
+
+      let row = event.target.getAttribute("data-rows")
+      let column = event.target.getAttribute("data-column")
+
       let blockID = event.dataTransfer.getData("textID");
       let shipType = event.dataTransfer.getData("shipType");
       let orientation = event.dataTransfer.getData("orientation");
-      //adding the dragged ship to it 
       let blok = document.querySelector(blockID);
-      event.target.appendChild(blok);
 
 
-      //setting the grid element ship type dataset
-      event.target.dataset.shipType = shipType;
-      event.target.dataset.orientation = orientation;
-  
+      let shipLength = blok.getAttribute("data-length")
+
+      if (dropCheck(parseInt(row), parseInt(column), orientation, parseInt(shipLength)) == true) {
+        event.target.appendChild(blok);
+        //setting the grid element ship type dataset
+        event.target.dataset.shipType = shipType;
+        event.target.dataset.orientation = orientation;
+      }
+
     });
-
-
   }
 }
+
+
+
+
+function dropCheck(row, column, orientation, shipLength) {
+
+
+  if (orientation == "vertical") {
+    //check for edges 
+    if (row + shipLength > 10) {
+      alert("Piece must be on the board")
+      return false;
+    }
+
+    for (let i = 0; i < shipLength; i++) {
+      if (checkBoard.board[row + i][column] == 1) {
+        //cannot place
+        alert("Ship is already there!")
+        return false
+      } else {
+        checkBoard.board[row + i][column] = 1;
+
+      }
+
+    }
+    return true;
+  } else {
+    if (column + shipLength > 10) {
+      return valid = false;
+    }
+    for (let i = 0; i < shipLength; i++) {
+      //need to start at the column it was placed on 
+      if (checkBoard.board[row][column + i] == 1) {
+        alert("Ship is already there!")
+        return false
+      } else {
+        //its fine 
+        checkBoard.board[row][column + i] = 1;
+      }
+
+    }
+
+    return true;
+  }
+}
+
+
+
 
 
 
@@ -120,16 +176,13 @@ function boardSetup() {
   text.textContent = "Place your ships";
   //change orientation button
   const startBtn = document.createElement("button");
-  startBtn.classList="startBtn";
+  startBtn.classList = "startBtn";
   startBtn.textContent = "Start Game";
-
-  //grid
 
   //add the listneers to the blocks of the grid
   addPlacementListeners(grid.childNodes);
 
   let shipContainer = placementShips();
-
 
   //append all nodes
   setupContainer.appendChild(text);
@@ -137,9 +190,6 @@ function boardSetup() {
   setupContainer.appendChild(grid);
   setupContainer.appendChild(shipContainer)
 
-
-
- 
 
   return setupContainer;
 
@@ -167,7 +217,7 @@ function placementShips() {
     placementShip.classList = "ship" + i;
     placementShip.dataset.shipType = ships[i].shipType;
     placementShip.dataset.length = ships[i].length;
-   placementShip.dataset.orientation="vertical"
+    placementShip.dataset.orientation = "vertical"
     placementShip.id = "vertical";
     //create the number of blocks that are needed .
     for (let ii = 0; ii < ships[i].length; ii++) {
@@ -185,18 +235,18 @@ function placementShips() {
       event.dataTransfer.setData("shipType", event.target.dataset.shipType);
       event.dataTransfer.setData("shipLength", event.target.dataset.length);
       event.dataTransfer.setData("orientation", event.target.dataset.orientation);
- 
+
 
     });
 
     placementShip.addEventListener("dblclick", (event) => {
 
       if (placementShip.dataset.orientation == "vertical") {
-        placementShip.dataset.orientation="horizontal"
-        placementShip.id="horizontalShip" 
+        placementShip.dataset.orientation = "horizontal"
+        placementShip.id = "horizontalShip"
       } else {
-        placementShip.dataset.orientation="vertical"
-        placementShip.id="" 
+        placementShip.dataset.orientation = "vertical"
+        placementShip.id = ""
       }
 
     });
