@@ -68,6 +68,11 @@ function endGame(result, winner) {
     const replayBtn = document.createElement("button");
     replayBtn.textContent = "Replay?"
 
+
+    replayBtn.addEventListener("click",(event)=>{
+      location.reload();
+    } )
+
     //add all elements
     popUpContainer.appendChild(text);
     popUpContainer.appendChild(winnerText);
@@ -76,8 +81,10 @@ function endGame(result, winner) {
     document.body.appendChild(popUpContainer);
   }
 
+
+
 }
-//temp board for checking if spot is available
+//temp board for checking if spot is
 let checkBoard = gameBoard();
 
 
