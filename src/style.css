@@ -177,3 +177,20 @@ body {
     width: fit-content;
     height: fit-content;
 }
+
+.backgroundCover{
+    background-color: black;
+    position: absolute;
+    left: 0%;
+
+    top: 0%;
+    transform: translateY(-0%);
+    text-align: center;
+
+   
+ 
+
+    width: 100%;
+    height: 100%;
+   
+}

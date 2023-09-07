@@ -22,8 +22,7 @@ const player = (name) => {
 
 
 
-    // Returns a random integer from 0 to 9:
-// Math.floor(Math.random() * 10);
+   
     return { getName,AIShipOrientation,AISpotPlacement}
 }
 

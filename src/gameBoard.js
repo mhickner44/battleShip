@@ -114,6 +114,7 @@ const gameBoard = () => {
 
         let container = document.createElement('div');
         container.classList = "gridContainer";
+        container.setAttribute("draggable",false)
        
 
         for (let i = 0; i < 10; i++) {

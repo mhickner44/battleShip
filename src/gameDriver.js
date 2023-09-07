@@ -28,8 +28,11 @@ AIBoard = fillBoard(AIBoard);
 let enemyGrid = document.getElementById("enemyGrid");
 addGridListeners(enemyGrid);
 
-//
+
 //display the popup selection for ship placement
+const background = document.createElement("div");
+background.classList = "backgroundCover"
+document.body.appendChild(background);
 document.body.appendChild(boardSetup());
 
 //start butten listener
@@ -148,10 +151,10 @@ function finalizePlacement() {
             const ship = shipFactory(lengthToShip[placementBoard[i].dataset.shipType])
             //add that ship using the method
             if (placementBoard[i].dataset.orientation == "vertical") {
-                p1Board.shipVertical(ship,rows,columns)
+                p1Board.shipVertical(ship, rows, columns)
                 shipNum++
             } else {
-                p1Board.shipHorizontal(ship,rows,columns)
+                p1Board.shipHorizontal(ship, rows, columns)
                 shipNum++
             }
 
@@ -159,8 +162,11 @@ function finalizePlacement() {
         columns++;
     }
     let setupContainer = document.querySelector(".setupContainer")
+    let background=document.querySelector(".backgroundCover")
     //hide the setupBoard
     setupContainer.remove();
+    background.remove()
+
 
 }
 

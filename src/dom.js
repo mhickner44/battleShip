@@ -69,9 +69,9 @@ function endGame(result, winner) {
     replayBtn.textContent = "Replay?"
 
 
-    replayBtn.addEventListener("click",(event)=>{
+    replayBtn.addEventListener("click", (event) => {
       location.reload();
-    } )
+    })
 
     //add all elements
     popUpContainer.appendChild(text);
@@ -91,13 +91,14 @@ let checkBoard = gameBoard();
 //add ship placement listeners
 function addPlacementListeners(grid) {
   for (let i = 0; i <= 99; i++) {
-
+    grid[i].setAttribute("draggable", false)
     grid[i].addEventListener("dragover", (event) => {
       // prevent default to allow drop
       event.preventDefault();
       //set the hover for multeiple here?
     });
     grid[i].addEventListener("drop", (event) => {
+
       // prevent default to allow drop
       event.preventDefault();
 
@@ -107,16 +108,21 @@ function addPlacementListeners(grid) {
       let blockID = event.dataTransfer.getData("textID");
       let shipType = event.dataTransfer.getData("shipType");
       let orientation = event.dataTransfer.getData("orientation");
-      let blok = document.querySelector(blockID);
+      if (blockID == "") {
+        //do nothing
+      } else {
+        let blok = document.querySelector(blockID);
+        let shipLength = blok.getAttribute("data-length")
 
+        if (dropCheck(parseInt(row), parseInt(column), orientation, parseInt(shipLength)) == true) {
+          event.target.appendChild(blok);
+          //setting the grid element ship type dataset
+          event.target.dataset.shipType = shipType;
+          event.target.dataset.orientation = orientation;
 
-      let shipLength = blok.getAttribute("data-length")
-
-      if (dropCheck(parseInt(row), parseInt(column), orientation, parseInt(shipLength)) == true) {
-        event.target.appendChild(blok);
-        //setting the grid element ship type dataset
-        event.target.dataset.shipType = shipType;
-        event.target.dataset.orientation = orientation;
+          blok.style.cursor = "not-allowed"
+          blok.setAttribute("draggable", false)
+        }
       }
 
     });
@@ -150,7 +156,8 @@ function dropCheck(row, column, orientation, shipLength) {
     return true;
   } else {
     if (column + shipLength > 10) {
-      return valid = false;
+      alert("Piece must be on the board")
+      return false;
     }
     for (let i = 0; i < shipLength; i++) {
       //need to start at the column it was placed on 
@@ -176,6 +183,10 @@ function dropCheck(row, column, orientation, shipLength) {
 function boardSetup() {
   const setupContainer = document.createElement("div");
   setupContainer.classList = "setupContainer";
+
+
+  //background 
+  
   let grid = game.renderBoard();
   grid.setAttribute('id', "placementGrid");
   //Place Ships text
@@ -191,10 +202,14 @@ function boardSetup() {
 
   let shipContainer = placementShips();
 
+  const message = document.createElement("h2");
+  message.textContent = "Double click to rotate ship"
+
   //append all nodes
   setupContainer.appendChild(text);
   setupContainer.appendChild(startBtn);
   setupContainer.appendChild(grid);
+  setupContainer.appendChild(message)
   setupContainer.appendChild(shipContainer)
 
 
@@ -231,6 +246,7 @@ function placementShips() {
       let shipBlock = document.createElement("div");
       shipBlock.id = "innerShip"
       placementShip.appendChild(shipBlock);
+      shipBlock.setAttribute("draggable", false)
     }
 
 
@@ -255,6 +271,8 @@ function placementShips() {
         placementShip.dataset.orientation = "vertical"
         placementShip.id = ""
       }
+      //remove draggable option
+
 
     });
     shipContainer.appendChild(placementShip);
@@ -263,4 +281,4 @@ function placementShips() {
 }
 
 
-export { newGame, addGridListeners, endGame, boardSetup };
+export { newGame, addGridListeners, endGame, boardSetup,dropCheck };

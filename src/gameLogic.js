@@ -1,7 +1,8 @@
 
 
 import shipFactory from './ship';
-
+import { dropCheck } from './dom';
+import { player } from './player';
 
 //ships
 const botCarrier = shipFactory("carrier");
@@ -10,50 +11,59 @@ const botCruiser = shipFactory("cruiser");
 const botSubmarine = shipFactory("submarine");
 const botDestroyer = shipFactory("destroyer");
 
-const p1Carrier = shipFactory("carrier");
-const p1battleship = shipFactory("battleship");
-const p1cruiser = shipFactory("cruiser");
-const p1submarine = shipFactory("submarine");
-const p1destroyer = shipFactory("destroyer");
 
 
+let ships = {
+    one: botCarrier,
+    two: botBattleship,
+    three: botCruiser,
+    four: botSubmarine,
+    five: botDestroyer,
+}
+
+///random numbers
 function fillBoard(board) {
-    // board.shipHorizontal(botCarrier, 0, 5);
-    // board.shipVertical(botBattleship, 0, 1);
-    // board.shipHorizontal(botCruiser, 7, 1);
-    // board.shipVertical(botSubmarine, 3, 4);
-    // board.shipHorizontal(botDestroyer, 8, 7);
+    //what am i using player for
+    //random numbers fucntino
+    let AIplayer = player();
+
+
+    //random row and column
+    let spot = AIplayer.AISpotPlacement()
+    let row = spot[0]
+    let column = spot[1]
+    //random orientation
+    //1 = vertical
+    //0=horizontal
+    let orientation = AIplayer.AIShipOrientation()
+    if (orientation == 0) {
+        orientaion = "vertical"
+    } else {
+        orientaion = "horizontal"
+    }
+
+
+    //each ship 
+    //need to double up on 3 or use the ship values
+    for (const ship in ships) {
+        //pass dropcheck the non ship object arguments 
+        if (dropCheck(row, column, orientation, length) == true) {
+
+            if (orientation == "vertical") {
+                //
+                board.shipVertical(ship, row, column);
+            } else {
+                board.shipHorizontal(ship, row, column);
+            }
+        }
+
+    }
+
     return board;
 }
 
-function fillBoardTemp(board) {
-    // board.shipHorizontal(p1Carrier, 0, 5);
-    // board.shipVertical(p1battleship, 2, 1);
-    // board.shipHorizontal(p1cruiser, 3, 4);
-    // board.shipHorizontal(p1submarine, 6, 7);
-    board.shipHorizontal(p1destroyer, 4, 6);
-    return board;
-}
 
-// function finalizePlacement() {
-//    //can I even access these boards here?
-//     let playerGrid = document.getElementById("playerGrid");
-//     let placementBoard = document.getElementById("placementGrid");
-
-
-//     //loop through transfering the ship type from the board to the logical board 
-//         for (const grid in placementBoard) {
-          
-//         }
-
-// }
-
-
-
-
-
-
-export { fillBoard, fillBoardTemp }
+export { fillBoard }
 
 
 
