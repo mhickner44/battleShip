@@ -96,7 +96,7 @@ const gameBoard = () => {
 
     let gameOver = () => {
         let endGame = true;
-       
+
         for (const ship in ships) {
             if (ships[ship].isSunk() == false) {
                 return false;
@@ -114,8 +114,8 @@ const gameBoard = () => {
 
         let container = document.createElement('div');
         container.classList = "gridContainer";
-        container.setAttribute("draggable",false)
-       
+        container.setAttribute("draggable", false)
+
 
         for (let i = 0; i < 10; i++) {
 
@@ -134,10 +134,55 @@ const gameBoard = () => {
     }
 
 
-    return { board, getSpot, shipHorizontal, shipVertical, recieveAttack, gameOver, getShips,renderBoard };
+    return { board, getSpot, shipHorizontal, shipVertical, recieveAttack, gameOver, getShips, renderBoard };
+}
+
+
+//check a valid ship placement
+function dropCheck(row, column, orientation, shipLength, tempBoard) {
+    tempBoard = tempBoard;
+ let   unchangedBoard = tempBoard;
+
+    if (orientation == "vertical") {
+        //check for edges 
+        if (row + shipLength > 10) {
+            alert("Piece must be on the board")
+            return false;
+        }
+
+        for (let i = 0; i < shipLength; i++) {
+            if (tempBoard.board[row + i][column] == 1) {
+                //cannot place
+                alert("Ship is already there!")
+                return [unchangedBoard, false]
+            } else {
+                tempBoard.board[row + i][column] = 1;
+
+            }
+
+        }
+        return [tempBoard, true];
+    } else {
+        if (column + shipLength > 10) {
+            alert("Piece must be on the board")
+            return [unchangedBoard, false]
+        }
+        for (let i = 0; i < shipLength; i++) {
+            //need to start at the column it was placed on 
+            if (tempBoard.board[row][column + i] == 1) {
+                alert("Ship is already there!")
+                return [unchangedBoard, false]
+            } else {
+                //its fine 
+                tempBoard.board[row][column + i] = 1;
+            }
+
+        }
+
+        return [tempBoard, true];
+    }
 }
 
 
 
-
-export default gameBoard;
+export { gameBoard, dropCheck };

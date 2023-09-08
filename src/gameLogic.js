@@ -1,7 +1,7 @@
 
 
 import shipFactory from './ship';
-import { dropCheck } from './dom';
+import { dropCheck, gameBoard } from './gameBoard';
 import { player } from './player';
 
 //ships
@@ -21,45 +21,51 @@ let ships = {
     five: botDestroyer,
 }
 
+ships = Object.values(ships)
+
 ///random numbers
 function fillBoard(board) {
-    //what am i using player for
+    //temp board
+    let checkBoard = gameBoard();
+
+
     //random numbers fucntino
     let AIplayer = player();
 
-
-    //random row and column
-    let spot = AIplayer.AISpotPlacement()
-    let row = spot[0]
-    let column = spot[1]
-    //random orientation
-    //1 = vertical
-    //0=horizontal
-    let orientation = AIplayer.AIShipOrientation()
-    if (orientation == 0) {
-        orientaion = "vertical"
-    } else {
-        orientaion = "horizontal"
-    }
-
-
     //each ship 
     //need to double up on 3 or use the ship values
-    for (const ship in ships) {
-        //pass dropcheck the non ship object arguments 
-        if (dropCheck(row, column, orientation, length) == true) {
+    for (let i = 0; i < 5;) {
+        //random row and column
+        let spot = AIplayer.AISpotPlacement()
+        let row = spot[0]
+        let column = spot[1]
+        //random orientation
+        //1 = vertical
+        //0=horizontal
+        let orientation = AIplayer.AIShipOrientation()
 
+        if (orientation[0] == 0) {
+            orientation = "vertical"
+        } else {
+            orientation = "horizontal"
+        }
+        //pass dropcheck the non ship object arguments 
+        //what if the row and column is bad?
+        let result = dropCheck(row, column, orientation, length, checkBoard)
+        checkBoard = result[0]
+
+        if (result[1] == true) {
             if (orientation == "vertical") {
-                //
-                board.shipVertical(ship, row, column);
+                checkBoard.shipVertical(ships[i], row, column);
             } else {
-                board.shipHorizontal(ship, row, column);
+                checkBoard.shipHorizontal(ships[i], row, column);
             }
+            i++
         }
 
     }
 
-    return board;
+    return checkBoard;
 }
 
 

@@ -1,7 +1,7 @@
 
 import './style.css';
 import { newGame, addGridListeners, endGame } from './dom.js';
-import gameBoard from './gameBoard';
+import { dropCheck,gameBoard } from './gameBoard';
 import { fillBoard, fillBoardTemp } from './gameLogic';
 import { player } from './player';
 import { boardSetup } from './dom.js';

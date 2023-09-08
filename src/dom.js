@@ -7,8 +7,12 @@ const root = document.getElementById("root");
 
 
 
-import gameBoard from "./gameBoard";
+
 import { handleAttack } from "./gameDriver";
+import { dropCheck, gameBoard } from "./gameBoard";
+
+
+
 
 const game = gameBoard();
 
@@ -84,12 +88,13 @@ function endGame(result, winner) {
 
 
 }
-//temp board for checking if spot is
-let checkBoard = gameBoard();
+
 
 
 //add ship placement listeners
 function addPlacementListeners(grid) {
+  //temp board for checking if spot is
+  let checkBoard = gameBoard();
   for (let i = 0; i <= 99; i++) {
     grid[i].setAttribute("draggable", false)
     grid[i].addEventListener("dragover", (event) => {
@@ -113,8 +118,9 @@ function addPlacementListeners(grid) {
       } else {
         let blok = document.querySelector(blockID);
         let shipLength = blok.getAttribute("data-length")
-
-        if (dropCheck(parseInt(row), parseInt(column), orientation, parseInt(shipLength)) == true) {
+        let value = dropCheck(parseInt(row), parseInt(column), orientation, parseInt(shipLength), checkBoard)
+        checkBoard = value[0]
+        if (value[1] == true) {
           event.target.appendChild(blok);
           //setting the grid element ship type dataset
           event.target.dataset.shipType = shipType;
@@ -131,49 +137,7 @@ function addPlacementListeners(grid) {
 
 
 
-
-function dropCheck(row, column, orientation, shipLength) {
-
-
-  if (orientation == "vertical") {
-    //check for edges 
-    if (row + shipLength > 10) {
-      alert("Piece must be on the board")
-      return false;
-    }
-
-    for (let i = 0; i < shipLength; i++) {
-      if (checkBoard.board[row + i][column] == 1) {
-        //cannot place
-        alert("Ship is already there!")
-        return false
-      } else {
-        checkBoard.board[row + i][column] = 1;
-
-      }
-
-    }
-    return true;
-  } else {
-    if (column + shipLength > 10) {
-      alert("Piece must be on the board")
-      return false;
-    }
-    for (let i = 0; i < shipLength; i++) {
-      //need to start at the column it was placed on 
-      if (checkBoard.board[row][column + i] == 1) {
-        alert("Ship is already there!")
-        return false
-      } else {
-        //its fine 
-        checkBoard.board[row][column + i] = 1;
-      }
-
-    }
-
-    return true;
-  }
-}
+//moving drop check to another module
 
 
 
@@ -186,7 +150,7 @@ function boardSetup() {
 
 
   //background 
-  
+
   let grid = game.renderBoard();
   grid.setAttribute('id', "placementGrid");
   //Place Ships text
@@ -281,4 +245,4 @@ function placementShips() {
 }
 
 
-export { newGame, addGridListeners, endGame, boardSetup,dropCheck };
+export { newGame, addGridListeners, endGame, boardSetup };
