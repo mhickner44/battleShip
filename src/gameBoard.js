@@ -140,20 +140,20 @@ const gameBoard = () => {
 
 //check a valid ship placement
 function dropCheck(row, column, orientation, shipLength, tempBoard) {
-    tempBoard = tempBoard;
+    //tempBoard = tempBoard;
  let   unchangedBoard = tempBoard;
 
     if (orientation == "vertical") {
         //check for edges 
         if (row + shipLength > 10) {
-            alert("Piece must be on the board")
-            return false;
+         
+           return [unchangedBoard, false]
         }
 
         for (let i = 0; i < shipLength; i++) {
             if (tempBoard.board[row + i][column] >= 1) {
                 //cannot place
-                alert("Ship is already there!")
+                
                 return [unchangedBoard, false]
             } else {
                 tempBoard.board[row + i][column] = 1;
@@ -164,13 +164,13 @@ function dropCheck(row, column, orientation, shipLength, tempBoard) {
         return [tempBoard, true];
     } else {
         if (column + shipLength > 10) {
-            alert("Piece must be on the board")
+       
             return [unchangedBoard, false]
         }
         for (let i = 0; i < shipLength; i++) {
             //need to start at the column it was placed on 
             if (tempBoard.board[row][column + i] >= 1) {
-                alert("Ship is already there!")
+             
                 return [unchangedBoard, false]
             } else {
                 //its fine 

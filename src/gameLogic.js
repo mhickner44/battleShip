@@ -33,7 +33,7 @@ function fillBoard(board) {
     let AIplayer = player();
 
     //each ship 
-    //need to double up on 3 or use the ship values
+
     for (let i = 0; i < 5;) {
         //random row and column
         let spot = AIplayer.AISpotPlacement()
@@ -50,8 +50,8 @@ function fillBoard(board) {
             orientation = "horizontal"
         }
         //pass dropcheck the non ship object arguments 
-        //what if the row and column is bad?
-        let result = dropCheck(row, column, orientation, length, checkBoard)
+       
+        let result = dropCheck(row, column, orientation, ships[i].getLength(), checkBoard)
         checkBoard = result[0]
 
         if (result[1] == true) {
