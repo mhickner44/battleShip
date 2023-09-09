@@ -113,7 +113,7 @@ function addPlacementListeners(grid) {
       let blockID = event.dataTransfer.getData("textID");
       let shipType = event.dataTransfer.getData("shipType");
       let orientation = event.dataTransfer.getData("orientation");
-      if (blockID == "") {
+      if (blockID == "" || row == undefined) {
         //do nothing
       } else {
         let blok = document.querySelector(blockID);

@@ -151,7 +151,7 @@ function dropCheck(row, column, orientation, shipLength, tempBoard) {
         }
 
         for (let i = 0; i < shipLength; i++) {
-            if (tempBoard.board[row + i][column] == 1) {
+            if (tempBoard.board[row + i][column] >= 1) {
                 //cannot place
                 alert("Ship is already there!")
                 return [unchangedBoard, false]
@@ -169,7 +169,7 @@ function dropCheck(row, column, orientation, shipLength, tempBoard) {
         }
         for (let i = 0; i < shipLength; i++) {
             //need to start at the column it was placed on 
-            if (tempBoard.board[row][column + i] == 1) {
+            if (tempBoard.board[row][column + i] >= 1) {
                 alert("Ship is already there!")
                 return [unchangedBoard, false]
             } else {
