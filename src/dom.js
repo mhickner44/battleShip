@@ -155,7 +155,7 @@ function boardSetup() {
   grid.setAttribute('id', "placementGrid");
   //Place Ships text
   const text = document.createElement("h2");
-  text.textContent = "Place your ships";
+  text.textContent = "Drag and drop to place ships";
   //change orientation button
   const startBtn = document.createElement("button");
   startBtn.classList = "startBtn";

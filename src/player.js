@@ -1,8 +1,8 @@
 
 
-const player = (name) => {
+const player = () => {
 
-    const getName = () => name;
+
 
     const AIShipOrientation= () => {
         let x, y;
@@ -23,7 +23,7 @@ const player = (name) => {
 
 
    
-    return { getName,AIShipOrientation,AISpotPlacement}
+    return { AIShipOrientation,AISpotPlacement}
 }
 
 export {player}
