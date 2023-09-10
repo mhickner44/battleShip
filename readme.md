@@ -1,4 +1,4 @@
-Battlship game built with vanilla javascript ---> [Game](https://mhickner44.github.io/battleShip/)
+Battlship game built with vanilla javascript ---> [ Click to play the Game!](https://mhickner44.github.io/battleShip/)
 <br>
 ![game](battleshipGame.png)
 
