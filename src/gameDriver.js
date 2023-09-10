@@ -8,8 +8,11 @@ import { boardSetup } from './dom.js';
 import shipFactory from './ship';
 
 
+let title=document.createElement("h1");
+title.classList="title"
+title.textContent="Battleship"
 
-
+document.body.appendChild(title);
 document.body.appendChild(newGame());
 
 //need for AI decisions
